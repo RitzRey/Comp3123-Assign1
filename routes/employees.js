@@ -5,7 +5,7 @@ const routes = express.Router()
 
 // Get All Employees
 // http://localhost:3001/api/v1/emp/employees
-routes.get("/emp", async (req, res) => {
+routes.get("/employees", async (req, res) => {
     try{
         const empList = await EmpModel.find({})
         res.status(200).send(empList)
@@ -16,7 +16,7 @@ routes.get("/emp", async (req, res) => {
 
 // Add new Employee
 // http://localhost:3002/api/v1/emp/employees
-routes.post("/emp", async (req, res) => {
+routes.post("/employees", async (req, res) => {
     console.log(req.body)
     try{
         const newEmp = new EmpModel({
@@ -31,9 +31,9 @@ routes.post("/emp", async (req, res) => {
 
 // Get Employee by Id
 // http://localhost:3002/api/v1/emp/employees/{eid}
-routes.post("/emp:eid", async (req, res) => {
+routes.post("/employees/:eid", async (req, res) => {
     try {
-        const employee = await EmpModel.findById(req.params.bookid)
+        const employee = await EmpModel.findById(req.params.eid)
         res.status(200).json(employee)
     } catch(error){
         res.status(500).json(error)
@@ -42,7 +42,7 @@ routes.post("/emp:eid", async (req, res) => {
 
 // Update Employee by Id
 // http://localhost:3002/api/v1/emp/employees{eid}
-routes.post("/emp/:eid", async (req, res) => {
+routes.post("/employees/:eid", async (req, res) => {
     try {
         const updatedEmp = await EmpModel.findByIdAndUpdate(req.params.eid, req.body)
         res.status(200).json(updatedEmp)
@@ -54,7 +54,7 @@ routes.post("/emp/:eid", async (req, res) => {
 
 // Delete Employee By Id
 // http://localhost:3002/api/v1/emp/employees?eid=
-routes.delete("/emp/employees?eid=", async (req, res) => {
+routes.delete("/employees/:eid", async (req, res) => {
     try {
         const employee = await EmpModel.findOneAndDelete(req.params.eid)
         if(!employee){

@@ -28,8 +28,8 @@ routes.post("/signup", async (req, res) => {
 
 
 // Get All Users for testing
-// http://localhost:3001/api/v1/user/
-routes.get("/user", async (req, res) => {
+// http://localhost:3001/api/v1/getUser/
+routes.get("/getUser", async (req, res) => {
     try{
         const userList = await UserModel.find({})
         res.status(200).send(userList)
@@ -40,8 +40,8 @@ routes.get("/user", async (req, res) => {
 
 // User delete for testing
 // Delete Employee By Id
-// http://localhost:3002/api/v1/user/:userid
-routes.delete("/user/:userid", async (req, res) => {
+// http://localhost:3002/api/v1/deleteUser/:userid
+routes.delete("/deleteUser/:userid", async (req, res) => {
     try {
         const user = await UserModel.findOneAndDelete(req.params.eid)
         if(!user){
