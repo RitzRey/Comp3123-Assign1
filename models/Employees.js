@@ -1,17 +1,33 @@
 const mongoose = require('mongoose')
 
 const employeeSchema = new mongoose.Schema({
-    employee:{
+    first_name:{
         type: String,
         required: true,
-        lowercased: true
+        maxlength: 100
     },
-    eid: {
-        type: Number,
+    last_name:{
+        type: String,
         required: true,
-        unique: true
+        maxlength: 50
+    },
+    email:{
+        type: String,
+        unique: true,
+        maxlength: 50
+    },
+    gender:{
+        type: String,
+        maxlength: 25,
+        enum: ["male","female","other"]
+
+    },
+    salary:{
+        type: Number,
+        required: true
     }
+    
 })
 
-
+// exports as mongoose model for user using employeeSchema
 module.exports = mongoose.model("employee", employeeSchema)

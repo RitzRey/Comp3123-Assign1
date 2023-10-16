@@ -6,10 +6,16 @@ const userSchema = new mongoose.Schema({
         required: true,
         lowercased: true,
         unique: true
-        
     },
-    email: String,
-    password: Number
+    email: {
+        type: String,
+        maxlength: 50,
+        unique: true
+    },
+    password: {
+        type: String,
+        maxlength: 50
+    }
 
 })
 

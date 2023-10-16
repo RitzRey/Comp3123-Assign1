@@ -23,7 +23,7 @@ routes.post("/emp", async (req, res) => {
             ...req.body
         })
         await newEmp.save()
-        res.status(200).send(newEmp)
+        res.status(201).send(newEmp)
     } catch(error){
         res.status(500).send(error)
     }
@@ -58,7 +58,7 @@ routes.delete("/emp/employees?eid=", async (req, res) => {
     try {
         const employee = await EmpModel.findOneAndDelete(req.params.eid)
         if(!employee){
-            res.status(200).send({message: "Employee Not found"})
+            res.status(204).send({message: "Employee Not found"})
         }else{
             res.status(200).send(employee)
         }
@@ -67,4 +67,5 @@ routes.delete("/emp/employees?eid=", async (req, res) => {
     }
 })
 
+// export routes
 module.exports = routes

@@ -1,21 +1,25 @@
 const express = require("express")
 const usersRoutes = require("./routes/users")
 const mongoose = require('mongoose')
+const empRoutes = require("./routes/employees")
 
 const app = express()
+const v1api = express()
 
 const SERVER_PORT = 3002
 
 app.use(express.json())
 app.use(express.urlencoded())
-const DB_CONNECTION_STRING = "mongodb+srv://reyritz2224:password123FullStack@cluster0.ehvajcf.mongodb.net/f2023_comp3123?retryWrites=true&w=majority"
+const DB_CONNECTION_STRING = "mongodb+srv://reyritz2224:password123FullStack@cluster0.ehvajcf.mongodb.net/?retryWrites=true&w=majority"
 
 mongoose.connect(DB_CONNECTION_STRING, {
     useNewUrlParser: true,
     useUnifiedTopology: true
 })
 
-app.use("/api/v1", usersRoutes)
+v1api.use("/user", usersRoutes)
+v1api.use("/emp", empRoutes)
+app.use("/api/v1", v1api)
 
 app.route("/")
     .get((req, res) => {

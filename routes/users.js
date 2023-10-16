@@ -12,7 +12,7 @@ routes.post("/signup", async (req, res) => {
             ... req.body
         })
         await newUser.save()
-        res.status(200).send(newUser)
+        res.status(201).send(newUser)
     } catch(error){
         res.status(500).send(error)
     }
@@ -22,4 +22,37 @@ routes.post("/signup", async (req, res) => {
 // http://localhost:3002/api/v1/user/login
 
 
+
+
+
+
+
+// Get All Users for testing
+// http://localhost:3001/api/v1/user/
+routes.get("/user", async (req, res) => {
+    try{
+        const userList = await UserModel.find({})
+        res.status(200).send(userList)
+    } catch(error){
+        res.status(500).send(error)
+    }
+})
+
+// User delete for testing
+// Delete Employee By Id
+// http://localhost:3002/api/v1/user/:userid
+routes.delete("/user/:userid", async (req, res) => {
+    try {
+        const user = await UserModel.findOneAndDelete(req.params.eid)
+        if(!user){
+            res.status(204).send({message: "User Not found"})
+        }else{
+            res.status(200).send(user)
+        }
+    } catch(error){
+        res.status(500).send(error)
+    }
+})
+
+// export routes
 module.exports = routes
